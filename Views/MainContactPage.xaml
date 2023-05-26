@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.MyContacts.Views.MainContactPage"
+             Title="My Contacts">
+
+    <Grid RowDefinitions="Auto,100*"
+          ColumnDefinitions=".70*, .30*">
+
+        <SearchBar Grid.Row="0"
+                   Grid.Column="0"
+                   Placeholder="Search Contact"
+                   Margin="10"
+                   x:Name="searchBar"
+                   TextChanged="searchBar_TextChanged"/>
+
+
+        <Button Text="Add"
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                BackgroundColor="Transparent"
+                TextColor="blue"
+                BorderWidth="0"
+                x:Name="BtnAddContact"
+                Clicked="BtnAddContact_Clicked"/>
+
+        <ListView BackgroundColor="Transparent"
+                 Grid.Row="1"
+                  Grid.ColumnSpan="2" 
+              x:Name="xmlContactList"
+              RowHeight="50"
+                      Margin="10"
+              SeparatorColor="Silver"
+              ItemSelected="xmlContactList_ItemSelected"
+              ItemTapped="xmlContactList_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Path=Name}"
+                          Detail="{Binding Email}">
+                        <TextCell.ContextActions>
+                            <MenuItem Text="Delete"
+                                      x:Name="MenuItemDelete"
+                                      IsDestructive="True"
+                                      Clicked="MenuItemDelete_Clicked"
+                                      CommandParameter="{Binding .}"/>
+
+                            <MenuItem Text="Edit"
+                                      x:Name="MenuItemEdit"
+                                      Clicked="MenuItemEdit_Clicked"
+                                      CommandParameter="{Binding .}"/>
+                        </TextCell.ContextActions>
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+
+    </Grid>
+
+
+</ContentPage>
